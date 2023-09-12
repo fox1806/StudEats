@@ -1,0 +1,43 @@
+{
+  "kategorije": [
+    {
+      "kategorijaJela": "Glavno jelo",
+      "imeJela": [
+        "Puretina s povrćem",
+        "Piletina s povrćem",
+        "Piletina na žaru"
+      ]
+    },
+    {
+      "kategorijaJela": "Prilog",
+      "imeJela": [
+        "Riža",
+        "Pašta",
+        "Krumpir s graškom"
+      ]
+    },
+    {
+      "kategorijaJela": "Desert",
+      "imeJela": [
+        "Kinder penguin",
+        "Torta od čokolade",
+        "Torta od maline"
+      ]
+    },
+    {
+      "kategorijaJela": "Juha",
+      "imeJela": [
+        "Juha od rajčice",
+        "Goveđa juha"
+      ]
+    },
+    {
+      "kategorijaJela": "Test",
+      "imeJela": [
+        "Test1",
+        "Test2",
+        "Test3"
+      ]
+    }
+  ]
+}
