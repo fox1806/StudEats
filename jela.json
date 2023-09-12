@@ -1,0 +1,240 @@
+{
+  "glavno_jelo": [
+    {
+      "naziv": "Kotlet na ro\u0161tilju",
+      "kalorije": 496,
+      "proteini": 32,
+      "ugljikohidrati": 17,
+      "masti": 12
+    },
+    {
+      "naziv": "Paprika\u0161 svinjski",
+      "kalorije": 317,
+      "proteini": 33,
+      "ugljikohidrati": 83,
+      "masti": 22
+    },
+    {
+      "naziv": "Pe\u010dena svinjetina",
+      "kalorije": 483,
+      "proteini": 33,
+      "ugljikohidrati": 90,
+      "masti": 24
+    },
+    {
+      "naziv": "Junetina s gra\u0161kom",
+      "kalorije": 284,
+      "proteini": 26,
+      "ugljikohidrati": 44,
+      "masti": 29
+    },
+    {
+      "naziv": "Puretina s povrćem",
+      "kalorije": 204,
+      "proteini": 35,
+      "ugljikohidrati": 44,
+      "masti": 29
+    },
+    {
+      "naziv": "Piletina s povrćem",
+      "kalorije": 224,
+      "proteini": 36,
+      "ugljikohidrati": 40,
+      "masti": 29
+    },
+    {
+      "naziv": "Piletina na žaru",
+      "kalorije": 234,
+      "proteini": 50,
+      "ugljikohidrati": 10,
+      "masti": 35
+    }
+  ],
+  "juha": [
+    {
+      "naziv": "Juha bistra",
+      "kalorije": 155,
+      "proteini": 34,
+      "ugljikohidrati": 24,
+      "masti": 12
+    },
+    {
+      "naziv": "Juha od brokule",
+      "kalorije": 287,
+      "proteini": 9,
+      "ugljikohidrati": 70,
+      "masti": 27
+    },
+    {
+      "naziv": "Juha od raj\u010dice",
+      "kalorije": 253,
+      "proteini": 40,
+      "ugljikohidrati": 32,
+      "masti": 5
+    },
+    {
+      "naziv": "Juha od gljiva",
+      "kalorije": 293,
+      "proteini": 50,
+      "ugljikohidrati": 32,
+      "masti": 5
+    }
+  ],
+  "glavno_jelo_vege": [
+    {
+      "naziv": "Lazanje od soje",
+      "kalorije": 257,
+      "proteini": 14,
+      "ugljikohidrati": 84,
+      "masti": 30
+    },
+    {
+      "naziv": "Musaka od \u0161ampinjona",
+      "kalorije": 153,
+      "proteini": 39,
+      "ugljikohidrati": 81,
+      "masti": 2
+    },
+    {
+      "naziv": "Lazanje od povr\u0107a",
+      "kalorije": 188,
+      "proteini": 49,
+      "ugljikohidrati": 26,
+      "masti": 19
+    }
+  ],
+  "prilog": [
+    {
+      "naziv": "Blitva na le\u0161o",
+      "kalorije": 264,
+      "proteini": 40,
+      "ugljikohidrati": 84,
+      "masti": 19
+    },
+    {
+      "naziv": "\u0110uve\u010d",
+      "kalorije": 351,
+      "proteini": 49,
+      "ugljikohidrati": 42,
+      "masti": 29
+    },
+    {
+      "naziv": "Gra\u0161ak s mrkvom",
+      "kalorije": 425,
+      "proteini": 19,
+      "ugljikohidrati": 57,
+      "masti": 14
+    },
+    {
+      "naziv": "Mlinci",
+      "kalorije": 598,
+      "proteini": 28,
+      "ugljikohidrati": 73,
+      "masti": 28
+    },
+    {
+      "naziv": "Kruh (\u0161nita - 0.05kg)",
+      "kalorije": 406,
+      "proteini": 33,
+      "ugljikohidrati": 22,
+      "masti": 17
+    },
+    {
+      "naziv": "Riža",
+      "kalorije": 200,
+      "proteini": 5,
+      "ugljikohidrati": 100,
+      "masti": 5
+    }
+  ],
+  "salata": [
+    {
+      "naziv": "Salata od graha",
+      "kalorije": 391,
+      "proteini": 35,
+      "ugljikohidrati": 58,
+      "masti": 29
+    },
+    {
+      "naziv": "Salata od svje\u017eeg kupusa",
+      "kalorije": 340,
+      "proteini": 21,
+      "ugljikohidrati": 23,
+      "masti": 2
+    },
+    {
+      "naziv": "Salata od kiselog kupusa",
+      "kalorije": 223,
+      "proteini": 25,
+      "ugljikohidrati": 13,
+      "masti": 6
+    },
+    {
+      "naziv": "Salata od svje\u017eih krastavaca",
+      "kalorije": 327,
+      "proteini": 38,
+      "ugljikohidrati": 80,
+      "masti": 3
+    }
+  ],
+  "desert": [
+    {
+      "naziv": "Puding \u010dokolada",
+      "kalorije": 222,
+      "proteini": 21,
+      "ugljikohidrati": 44,
+      "masti": 17
+    },
+    {
+      "naziv": "Puding vanilija",
+      "kalorije": 567,
+      "proteini": 39,
+      "ugljikohidrati": 86,
+      "masti": 25
+    },
+    {
+      "naziv": "Kompot breskva",
+      "kalorije": 465,
+      "proteini": 43,
+      "ugljikohidrati": 80,
+      "masti": 12
+    }
+  ],
+  "napitci": [
+    {
+      "naziv": "\u010caj",
+      "kalorije": 192,
+      "proteini": 30,
+      "ugljikohidrati": 60,
+      "masti": 28
+    },
+    {
+      "naziv": "Bijela kava",
+      "kalorije": 533,
+      "proteini": 42,
+      "ugljikohidrati": 81,
+      "masti": 30
+    },
+    {
+      "naziv": "Jogurt",
+      "kalorije": 221,
+      "proteini": 29,
+      "ugljikohidrati": 69,
+      "masti": 12
+    },
+    {
+      "naziv": "Vo\u0107ni jogurt",
+      "kalorije": 120,
+      "proteini": 46,
+      "ugljikohidrati": 36,
+      "masti": 1
+    },
+    {
+      "naziv": "Coca Cola",
+      "kalorije": 406,
+      "proteini": 28,
+      "ugljikohidrati": 55,
+      "masti": 12
+    }
+  ]
+}

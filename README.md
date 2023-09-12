@@ -1,41 +1,38 @@
-# StudEats (jelo-ver1)
+# StudEats
 
-Kreiranje projekta za potrebe diplomskog rada
+Dobrodošli na repozitorij web aplikacije StudEats!
+Aplikacija je kreirana u sklopu diplomskog rada te koristi tehnologije:
 
-## Install the dependencies
 ```bash
-yarn
-# or
+Quasar.js, Express.js, Pinia i  Google Firebase
+```
+
+### Kloniranje repozitorija
+
+```bash
+git clone https://github.com/fox1806/StudEats.git
+```
+
+### Preuzimanje svih paketa
+
+```bash
 npm install
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
+### Pokretanje servera
+
+```bash
+npx nodemon server.js
+```
+
+### Pokretanje aplikacije u development mode-u
+
 ```bash
 quasar dev
 ```
 
+### Build aplikacije
 
-### Lint the files
-```bash
-yarn lint
-# or
-npm run lint
-```
-
-
-### Format the files
-```bash
-yarn format
-# or
-npm run format
-```
-
-
-
-### Build the app for production
 ```bash
 quasar build
 ```
-
-### Customize the configuration
-See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js).
