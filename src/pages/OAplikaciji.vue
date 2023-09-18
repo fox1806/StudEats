@@ -5,26 +5,36 @@
         <div class="text-h6">Diplomski rad - Veleučilište u Rijeci</div>
       </q-card-section>
       <q-card-section class="card-body">
-        Ova aplikacija je napravljena kao dio diplomskog rada na Veleučilištu u Rijeci.
+        Aplikacija je napravljena kao dio diplomskog rada na Veleučilištu u
+        Rijeci.
       </q-card-section>
       <q-card-section class="card-body">
-        Želja aplikacije je pomoći studentima u praćenju prehrane radi održavanja zdravog načina života.
+        Želja aplikacije je pomoći studentima u praćenju prehrane radi
+        održavanja zdravog načina života.
       </q-card-section>
       <q-card-section class="card-list">
         <q-list>
           <q-item-label class="list-header">Ciljevi aplikacije:</q-item-label>
           <q-item class="list-item">
-            <q-item-section>1. Istraživanje front end i back end tehnologija</q-item-section>
-
+            <q-item-section
+              >1. Istraživanje front end i back end tehnologija</q-item-section
+            >
           </q-item>
           <q-item class="list-item">
-            <q-item-section>2. Istraživanje tjelovježbe i prehrani koja pospješuje isto</q-item-section>
+            <q-item-section
+              >2. Istraživanje tjelovježbe i prehrani koja pospješuje
+              isto</q-item-section
+            >
           </q-item>
           <q-item class="list-item">
-            <q-item-section>3. Istraživanje prehrane u studentskim menzama </q-item-section>
+            <q-item-section
+              >3. Istraživanje prehrane u studentskim menzama
+            </q-item-section>
           </q-item>
           <q-item class="list-item">
-            <q-item-section>4. Implementacija korisničkih zahtjeva</q-item-section>
+            <q-item-section
+              >4. Implementacija korisničkih zahtjeva</q-item-section
+            >
           </q-item>
         </q-list>
       </q-card-section>
@@ -34,8 +44,8 @@
 
 <script>
 export default {
-  name: 'PageIndex'
-}
+  name: "PageIndex",
+};
 </script>
 
 <style scoped>
@@ -51,11 +61,11 @@ export default {
   max-width: 800px;
   width: 100%;
   background: #ffffff;
-  box-shadow: 10px 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 10px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .card-header {
-  background: #26A69A;
+  background: #26a69a;
   color: white;
   padding: 16px;
 }

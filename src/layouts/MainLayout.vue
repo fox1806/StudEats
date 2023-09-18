@@ -11,24 +11,18 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title @click="changeRoute('/')">
-          StudEats
-        </q-toolbar-title>
-        <q-icon name="person" class="larger-icon q-mr-md" @click="changeRoute('/login')"/>
+        <q-toolbar-title @click="changeRoute('/')"> StudEats </q-toolbar-title>
+        <q-icon
+          name="person"
+          class="larger-icon q-mr-md"
+          @click="changeRoute('/login')"
+        />
       </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
+    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
       <q-list>
-        <q-item-label
-          header
-        >
-          Izbornik
-        </q-item-label>
+        <q-item-label header> Izbornik </q-item-label>
 
         <EssentialLink
           v-for="link in essentialLinks"
@@ -39,25 +33,15 @@
         <div class="dno">
           <q-separator />
 
-          <q-item
-            clickable
-            tag="a"
-            @click = "logout()"
-            >
-
-            <q-item-section
-            avatar
-            >
-            <q-icon name="logout" />
+          <q-item clickable tag="a" @click="logout()">
+            <q-item-section avatar>
+              <q-icon name="logout" />
             </q-item-section>
 
             <q-item-section>
               <q-item-label>Odjavi se</q-item-label>
             </q-item-section>
-
-
           </q-item>
-
         </div>
       </q-list>
     </q-drawer>
@@ -75,50 +59,49 @@
 </style>
 
 <script>
-import { defineComponent, ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
+import { defineComponent, ref } from "vue";
+import EssentialLink from "components/EssentialLink.vue";
 
-import { useUserStore} from '../store/user-store'
+import { useUserStore } from "../store/user-store";
 
 const userStore = useUserStore();
 
-
 const linksList = [
-{
-  title: 'Korisnički profil',
-  icon: 'person',
-  link: '/user-profile'
-},
-{
-  title: 'Naslovna stranica',
-  caption: 'Što sam jeo?',
-  icon: 'restaurant',
-  link: '/'
-},
-{
-  title: "Statistika",
-  caption: "Statistički podaci o unosima",
-  icon: 'bar_chart',
-  link: '/statistika'
-},
-{
-  title: "O aplikaciji",
-  caption: "Više o aplikaciji",
-  icon: 'info',
-  link: '/o-aplikaciji'
-},
-{
-  title: "Kontakt",
-  icon: 'contact_support',
-  link: '/kontakt'
-}
-]
+  {
+    title: "Korisnički profil",
+    icon: "person",
+    link: "/user-profile",
+  },
+  {
+    title: "Naslovna stranica",
+    caption: "Što sam jeo?",
+    icon: "restaurant",
+    link: "/",
+  },
+  {
+    title: "Statistika",
+    caption: "Statistički podaci o unosima",
+    icon: "bar_chart",
+    link: "/statistika",
+  },
+  {
+    title: "O aplikaciji",
+    caption: "Više o aplikaciji",
+    icon: "info",
+    link: "/o-aplikaciji",
+  },
+  {
+    title: "Kontakt",
+    icon: "contact_support",
+    link: "/kontakt",
+  },
+];
 
 export default defineComponent({
-  name: 'MainLayout',
+  name: "MainLayout",
 
   components: {
-    EssentialLink
+    EssentialLink,
   },
 
   methods: {
@@ -126,46 +109,48 @@ export default defineComponent({
       this.$router.replace(link);
     },
     logout() {
-
-      if(!!userStore.fetchUser()){
+      if (!!userStore.fetchUser()) {
         userStore.logout();
-        this.$router.push('/login')
-      }else{
+        this.$router.push("/login");
         this.$q.notify({
-          position: 'top',
-          color: 'negative',
-          message: 'Niste prijavljeni',
-          icon: 'report_problem'
-        })
+          position: "top",
+          color: "positive",
+          message: "Odjavljeni ste",
+          icon: "logout",
+        });
+      } else {
+        this.$q.notify({
+          position: "top",
+          color: "negative",
+          message: "Niste prijavljeni",
+          icon: "report_problem",
+        });
       }
-
-    }
+    },
   },
 
-  setup () {
-    const leftDrawerOpen = ref(false)
+  setup() {
+    const leftDrawerOpen = ref(false);
 
     return {
       essentialLinks: linksList,
       leftDrawerOpen,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
+      toggleLeftDrawer() {
+        leftDrawerOpen.value = !leftDrawerOpen.value;
       },
-
-    }
-  }
-})
+    };
+  },
+});
 </script>
 
 <style>
 .q-list {
   display: flex;
   flex-direction: column;
-  height: 100%;  /* Osigurava da lista zauzima punu visinu */
+  height: 100%; /* Osigurava da lista zauzima punu visinu */
 }
 
 .dno {
   margin-top: auto;
 }
-
 </style>
