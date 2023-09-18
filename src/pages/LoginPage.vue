@@ -44,8 +44,8 @@ export default {
   setup() {},
   data() {
     return {
-      email: "test@test.com",
-      password: "loreta",
+      email: "",
+      password: "",
       showPasswordError: false,
       showRequests: false,
     };

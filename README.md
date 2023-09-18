@@ -36,3 +36,19 @@ quasar dev
 ```bash
 quasar build
 ```
+
+### Testni račun
+
+```bash
+Radi potrebe testiranja aplikacije, napravljen je račun sa unesenim
+korisničkim podacima i podacima prehrane
+
+email: "test@test.com",
+password: "loreta",
+```
+
+### Dodatne informacije
+
+```bash
+Aplikacija je dostupna na linku: https://verzija2.diplomski.me/#/
+```

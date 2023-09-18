@@ -53,9 +53,9 @@ export default {
   name: "RegisterPage",
   data() {
     return {
-      email: "test1@test.com",
-      password: "123456",
-      confirmPassword: "123456",
+      email: "",
+      password: "",
+      confirmPassword: "",
       isPwd: true,
       isPwdConfirm: true,
     };
