@@ -1,126 +1,3 @@
-<template>
-  <q-page>
-    <div class="flex flex-center q-ma-md">
-      <q-select
-        label="Odaberite vrstu statistike"
-        :options="['Dnevno', 'Tjedno', 'Mjesečno']"
-        v-model="selectedStatType"
-        @update:model-value="loadData()"
-        outlined
-      />
-    </div>
-
-    <div
-      class="dnevno flex flex-center"
-      v-if="this.selectedStatType == 'Dnevno'"
-    >
-      <q-date
-        v-model="odabraniDan"
-        mask="YYYY-MM-DD"
-        :locale="myLocale"
-        @update:model-value="dateChangeDay"
-        class="q-pa-sm"
-      />
-    </div>
-
-    <div class="tjedno" v-if="this.selectedStatType == 'Tjedno'">
-      <div class="flex flex-center">
-        <q-date
-          v-model="datumTjedan"
-          landscape
-          mask="YYYY-MM-DD"
-          @update:model-value="dateChangeWeek"
-          :locale="myLocale"
-          class="q-pa-sm"
-        />
-      </div>
-    </div>
-    <div
-      class="mjesecno flex flex-center q-ma-md"
-      v-if="this.selectedStatType == 'Mjesečno'"
-    >
-      <q-select
-        v-model="odabraniMjesec"
-        :options="months"
-        label="Odaberite mjesec"
-        option-label="label"
-        option-value="value"
-        @update:model-value="dateChangeMonth"
-        outlined
-      />
-    </div>
-    <div
-      v-if="this.praznoPolje === true"
-      class="flex flex-center upozorenjePeriod"
-    >
-      <h6>Nema podataka za odabrani period</h6>
-    </div>
-    <div
-      v-if="
-        (this.selectedStatType == 'Tjedno' ||
-          this.selectedStatType == 'Dnevno' ||
-          this.selectedStatType == 'Mjesečno') &&
-        this.praznoPolje == false &&
-        this.ucitano == false &&
-        (this.odabraniDan || this.datumTjedan || this.odabraniMjesec)
-      "
-    >
-      <h6 class="flex flex-center loadData bounce">Učitavam podatke</h6>
-    </div>
-    <div
-      v-if="
-        (this.selectedStatType == 'Tjedno' ||
-          this.selectedStatType == 'Dnevno' ||
-          this.selectedStatType == 'Mjesečno') &&
-        this.praznoPolje == false &&
-        this.ucitano == true
-      "
-    >
-      <div
-        v-if="this.potrebniProteini > 0"
-        class="flex flex-center kartice-container"
-      >
-        <p
-          class="karticaStatistika"
-          :class="
-            this.statistickaObradaProteina() ===
-            'Dovoljno proteina za navedeni period'
-              ? 'karticaStatistika-dovoljno'
-              : 'karticaStatistika-nedostatak'
-          "
-        >
-          {{ this.statistickaObradaProteina() }}
-        </p>
-        <p
-          class="karticaStatistika"
-          :class="
-            this.statistickaObradaKalorija() ===
-            'Dovoljno kalorija za navedeni period'
-              ? 'karticaStatistika-dovoljno'
-              : 'karticaStatistika-nedostatak'
-          "
-        >
-          {{ this.statistickaObradaKalorija() }}
-        </p>
-      </div>
-      <div v-if="this.potrebniProteini > 0">
-        <h5 class="flex flex-center">Prosječne vrijednosti za period</h5>
-        <div class="q-pa-xl flex flex-center kartice">
-          <KarticaNutrijenata
-            :calories="this.kalorije"
-            :proteins="this.proteini"
-            :fats="this.masti"
-            :carbs="this.ugljikohidrati"
-          />
-        </div>
-      </div>
-    </div>
-  </q-page>
-</template>
-
-<script>
-import KarticaNutrijenata from "../components/KarticaNutrijenata.vue";
-
 import {
   db,
   onAuthStateChanged,
@@ -131,19 +8,11 @@ import {
   where,
   onSnapshot,
 } from "../boot/firebase.js";
-
 import { useUserStore } from "../store/user-store";
-import { date } from "quasar";
-import { connectFirestoreEmulator } from "firebase/firestore";
 const { parse, getISOWeek } = require("date-fns");
+import { userStore } from "./PrikazStatistika.vue";
 
-const userStore = useUserStore();
-
-const TDEE = await userStore.fetchNewTDEE({
-  uid: userStore.fetchUser().id,
-});
-
-export default {
+export default (await import("vue")).defineComponent({
   name: "PrikazStatistika",
   components: {
     KarticaNutrijenata,
@@ -203,13 +72,14 @@ export default {
         { label: "Studeni", value: 11 },
         { label: "Prosinac", value: 12 },
       ],
-      selectedWeek: [], // Ovo je array koji se koristi za prikaz tjedna na Q-Date elementu
+      selectedWeek: [],
 
-      selectedStatType: [],
+      // selectedStatType: [],
+      selectedStatType: "Tjedno",
       praznoPolje: false,
       trenutniTjedan: "",
       datumTjedan: "",
-      brojDanaTjedna: "", // broj tekuceg dana u tjednu (1 do 7)
+      brojDanaTjedna: "",
       podaci: [],
       kalorije: null,
       masti: null,
@@ -259,7 +129,6 @@ export default {
     tjedanGodine(datum) {
       // funkcija kalkulira koji je datum u godini za odabrani dan
       // i vraća taj datum
-
       const dateParse = parse(datum, "yyyy-MM-dd", new Date());
       const weekNumber = getISOWeek(dateParse);
 
@@ -339,55 +208,24 @@ export default {
         this.proteini += rezultati[index].proteini;
       }
       if (this.selectedStatType === "Tjedno") {
-        if (this.brojDanaTjedna !== null) {
-          // dodan brojDanaTjedna za tekuce tjedne, u slucaju da je tek ponedjeljak
-          // nema smisla dijeliti sa 7, nego se dijeli sa 1 i tako dalje
-          if (this.brojDanaTjedna === 0) {
-            this.brojDanaTjedna = 7;
-          }
-          this.kalorije = Math.round(this.kalorije / this.brojDanaTjedna);
-          this.masti = Math.round(this.masti / this.brojDanaTjedna);
-          this.ugljikohidrati = Math.round(
-            this.ugljikohidrati / this.brojDanaTjedna
-          );
-          this.proteini = Math.round(this.proteini / this.brojDanaTjedna);
-        } else {
-          // u slucaju da su odabrani prethodni tjedni, dijeli se uredno sa 7
-          this.kalorije = Math.round(this.kalorije / 7);
-          this.masti = Math.round(this.masti / 7);
-          this.ugljikohidrati = Math.round(this.ugljikohidrati / 7);
-          this.proteini = Math.round(this.proteini / 7);
+        if (this.brojDanaTjedna === 0) {
+          this.brojDanaTjedna = 7;
         }
+        this.kalorije = Math.round(this.kalorije / 7);
+        this.masti = Math.round(this.masti / 7);
+        this.ugljikohidrati = Math.round(this.ugljikohidrati / 7);
+        this.proteini = Math.round(this.proteini / 7);
       }
       if (this.selectedStatType === "Mjesečno") {
-        const tekuciMjesec = new Date();
-        const tekuciMjesecIndex = tekuciMjesec.getMonth() + 1;
-
-        if (this.odabraniMjesec.value === tekuciMjesecIndex) {
-          // ako smo u tekucem mjesecu, dijeli se sa
-          // brojem koliko dana je proslo do sada
-          const brojTekucihDana = tekuciMjesec.getDate();
-          this.kalorije = Math.round(this.kalorije / brojTekucihDana);
-          this.masti = Math.round(this.masti / brojTekucihDana);
-          this.ugljikohidrati = Math.round(
-            this.ugljikohidrati / brojTekucihDana
-          );
-          this.proteini = Math.round(this.proteini / brojTekucihDana);
-        } else {
-          // ako biramo neki drugi mjesec, dijeli se sa
-          // brojem dana u odabranom mjesecu
-          const daniOdabranogMjeseca = new Date(
-            2023,
-            this.odabraniMjesec.value,
-            0
-          ).getDate();
-          this.kalorije = Math.round(this.kalorije / daniOdabranogMjeseca);
-          this.masti = Math.round(this.masti / daniOdabranogMjeseca);
-          this.ugljikohidrati = Math.round(
-            this.ugljikohidrati / daniOdabranogMjeseca
-          );
-          this.proteini = Math.round(this.proteini / daniOdabranogMjeseca);
-        }
+        const daysInMonth = new Date(
+          2023,
+          this.odabraniMjesec.value,
+          0
+        ).getDate();
+        this.kalorije = Math.round(this.kalorije / daysInMonth);
+        this.masti = Math.round(this.masti / daysInMonth);
+        this.ugljikohidrati = Math.round(this.ugljikohidrati / daysInMonth);
+        this.proteini = Math.round(this.proteini / daysInMonth);
       }
       this.statistickaObradaKalorija();
       this.statistickaObradaProteina();
@@ -494,7 +332,6 @@ export default {
       ).padStart(2, "0")}-${String(endDate.getDate()).padStart(2, "0")}`;
       this.selectedWeek = [startWeek, endWeek];
       // dio koda koji obradjuje podatke za odabrani tjedan
-
       const odabraniTjedan = this.tjedanGodine(this.datumTjedan);
 
       // kreiranje tekuceg tjedna
@@ -508,7 +345,9 @@ export default {
 
       if (tekuciBrojTjedan === odabraniTjedan) {
         const today = new Date();
-        this.brojDanaTjedna = today.getDay(); // broj tekuceg dana u tjednu (1 do 6, 0 je nedjelja)
+        this.brojDanaTjedna = today.getDay();
+
+        console.log("trenutni tjedan", this.brojDanaTjedna);
       }
 
       this.datumTjedan = { from: startWeek, to: endWeek };
@@ -567,7 +406,7 @@ export default {
       }
     },
     statistickaObradaKalorija() {
-      if (this.kalorije < TDEE) {
+      if (this.kalorije < userStore.fetchTDEE()) {
         return "Nedostatak kalorija za navedeni period";
       } else {
         return "Dovoljno kalorija za navedeni period";
@@ -586,74 +425,4 @@ export default {
       });
     },
   },
-};
-</script>
-
-<style>
-.q-select {
-  width: 100%;
-}
-
-.upozorenjePeriod {
-  color: red;
-  margin-top: -50px;
-}
-
-.dnevno {
-  transform: scale(0.9);
-}
-.tjedno {
-  transform: scale(0.9);
-}
-.kartice {
-  margin-top: -80px;
-  margin-bottom: -80px;
-}
-
-.kartice-container {
-  display: flex;
-}
-
-/* Stilovi za pojedinačne kartice */
-.karticaStatistika {
-  flex: 1;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 10px 10px 6px rgba(0, 0, 0, 0.1);
-  padding: 1rem;
-  margin: 0.5rem;
-  text-align: center;
-}
-
-.karticaStatistika-dovoljno {
-  background-color: #d4edda; /* Pastelno zelena */
-  color: #155724; /* Tamnozelena boja teksta */
-}
-
-/* Stil za negativni ishod */
-.karticaStatistika-nedostatak {
-  background-color: #f8d7da; /* Pastelno crvena */
-  color: #721c24; /* Tamnocrvena boja teksta */
-}
-
-@media (min-width: 768px) {
-  .kartice-container {
-    width: calc(60% - 10px);
-    margin: 0 auto;
-  }
-}
-
-@keyframes bounce {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-.loadData {
-  animation: bounce 0.5s ease infinite;
-}
-</style>
+});

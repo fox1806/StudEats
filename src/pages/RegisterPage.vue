@@ -67,6 +67,7 @@ export default {
           color: "negative",
           message: "Lozinke se ne podudaraju",
           icon: "report_problem",
+          position: "top",
         });
         return;
       }
@@ -89,11 +90,20 @@ export default {
             position: "top",
           });
           this.$router.push("/user-profile");
+        } else if (register == "auth/weak-password") {
+          // lozinka mora biti dulja od 6 znakova
+          this.$q.notify({
+            color: "negative",
+            icon: "report_problem",
+            message: "Lozinka mora imati minimalno 6 znaka",
+            position: "top",
+          });
         } else {
           this.$q.notify({
             color: "negative",
             message: "Greška pri registraciji, korisnik je prijavljen",
             icon: "report_problem",
+            position: "top",
           });
           return;
         }
@@ -102,6 +112,7 @@ export default {
           color: "negative",
           message: "Greška pri registraciji: " + error.message,
           icon: "report_problem",
+          position: "top",
         });
       }
     },

@@ -67,6 +67,7 @@ export const useUserStore = defineStore("user", {
           } catch (error) {
             const errorCode = error.code;
             const errorMessage = error.message;
+            return errorCode;
             // Handle errors here
           }
         }
@@ -165,7 +166,7 @@ export const useUserStore = defineStore("user", {
 
           const selectedGoal = docSnapshot.data().selectedGoal;
 
-          const multiplier2 =
+          let multiplier2 =
             selectedGoal == "Smrsaviti"
               ? -0.05
               : selectedGoal == "Udebljati se"
